@@ -2,14 +2,18 @@ DROP DATABASE IF EXISTS product_overview;
 CREATE DATABASE product_overview;
 \c product_overview;
 
+DROP TABLE IF EXISTS product_list;
+
 CREATE TABLE product_list (
   id  SERIAL NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
   slogan TEXT NOT NULL,
   description TEXT NOT NULL,
   category TEXT NOT NULL,
-  default_price MONEY NOT NULL
+  default_price DECIMAL(12,2) NOT NULL
 );
+
+DROP TABLE IF EXISTS features;
 
 CREATE TABLE features (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -21,6 +25,8 @@ CREATE TABLE features (
       REFERENCES product_list(id)
       ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS related;
 
 CREATE TABLE related (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -36,18 +42,22 @@ CREATE TABLE related (
         ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS styles;
+
 CREATE TABLE styles (
   id SERIAL NOT NULL PRIMARY KEY,
   productId INT NOT NULL,
   name TEXT NOT NULL,
-  sale_price MONEY,
-  original_price MONEY NOT NULL,
+  sale_price DECIMAL(12,2) DEFAULT NULL,
+  original_price DECIMAL(12,2) NOT NULL,
   default_style BOOLEAN NOT NULL DEFAULT false,
   CONSTRAINT fk_product_id
     FOREIGN KEY(productId)
       REFERENCES product_list(id)
       ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS photos;
 
 CREATE TABLE photos (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -59,6 +69,8 @@ CREATE TABLE photos (
       REFERENCES styles(id)
       ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS skus;
 
 CREATE TABLE skus (
   id SERIAL NOT NULL PRIMARY KEY,
