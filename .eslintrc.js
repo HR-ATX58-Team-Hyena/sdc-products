@@ -12,6 +12,6 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', { singleQuote: true, parser: 'flow' }],
     'no-console': 'off',
-    'camelcase': 'off',
-  }
-}
+    camelcase: 'off',
+  },
+};
