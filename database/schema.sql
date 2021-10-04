@@ -35,6 +35,8 @@ CREATE TABLE styles (
   default_style BOOLEAN NOT NULL DEFAULT false
 );
 
+CREATE INDEX product_styles_index ON styles(product_id);
+
 CREATE TABLE photos (
   id SERIAL NOT NULL PRIMARY KEY,
   styleId INT NOT NULL,
