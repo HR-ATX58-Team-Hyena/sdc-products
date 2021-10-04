@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const { getProductList } = require('../database/queries/index');
+const {
+  getProductList,
+  getProductStyles,
+} = require('../database/queries/index');
 
 const app = express();
 const port = 4444;
@@ -27,7 +30,17 @@ app.get('/products', (req, res) => {
 //   getProductInfo()
 // });
 
-// app.get('/products/:id/sytles')
+app.get('/products/:product_id/sytles', (req, res) => {
+  const productId = req.params.product_id;
+  getProductStyles(productId, (err, stylesData) => {
+    if (err) {
+      console.log('Error retrieving styles data');
+      res.status(404).send();
+    } else {
+      res.send(stylesData);
+    }
+  });
+});
 
 // app.get('/products/:id/related')
 
