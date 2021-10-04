@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { getProducts } = require('../database/queries/index');
+const { getProductList } = require('../database/queries/index');
 
 const app = express();
 const port = 4444;
@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
   res.send('Connected to the Database');
 });
 
-app.get('/getProductList', (req, res) => {
-  getProducts((err, allProducts) => {
+app.get('/products', (req, res) => {
+  getProductList((err, allProducts) => {
     if (err) {
       console.log('Error to retrieve all products');
       res.status(404).send();
@@ -22,6 +22,14 @@ app.get('/getProductList', (req, res) => {
     }
   });
 });
+
+// app.get('/products/:id', (req, res) => {
+//   getProductInfo()
+// });
+
+// app.get('/products/:id/sytles')
+
+// app.get('/products/:id/related')
 
 app.listen(port, (err) => {
   if (err) {

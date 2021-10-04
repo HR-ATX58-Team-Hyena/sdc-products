@@ -1,5 +1,11 @@
-const getProducts = require('./getProducts');
+const getProductList = require('./getProductList');
+const getProductInfo = require('./getProductInfo');
+const getProductStyles = require('./getProductStyles');
+const getRelatedProducts = require('./getRelatedProducts');
 
 module.exports = {
-  getProducts,
+  getProductList,
+  getProductInfo,
+  getProductStyles,
+  getRelatedProducts,
 };
