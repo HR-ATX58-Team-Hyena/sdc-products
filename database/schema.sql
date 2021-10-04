@@ -73,7 +73,7 @@ FROM '/Users/sewell/Hack Reactor/Repos/SDC/sdc-products/csvData/related.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY styles(id, productId, name, sale_price, original_price, default_style)
+COPY styles(id, product_id, name, sale_price, original_price, default_style)
 FROM '/Users/sewell/Hack Reactor/Repos/SDC/sdc-products/csvData/styles.csv'
 DELIMITER ','
 CSV HEADER;

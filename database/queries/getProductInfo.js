@@ -1,7 +1,7 @@
 const { pool } = require('../index');
 
 const getProductInfo = (productId, callback) => {
-  const queryString = `SELECT * from product_list WHERE ${productId};`;
+  const queryString = `SELECT * from product_list WHERE id = ${productId};`;
 
   pool.query(queryString, (err, productInfo) => {
     if (err) {

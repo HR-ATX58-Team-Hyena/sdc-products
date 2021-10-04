@@ -40,8 +40,9 @@ app.get('/products/:product_id', (req, res) => {
   });
 });
 
-app.get('/products/:product_id/sytles', (req, res) => {
+app.get('/products/:product_id/styles', (req, res) => {
   const productId = req.params.product_id;
+
   getProductStyles(productId, (err, stylesData) => {
     if (err) {
       console.log('Error retrieving styles data');
