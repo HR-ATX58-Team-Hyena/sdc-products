@@ -13,6 +13,8 @@ CREATE TABLE product_list (
   default_price TEXT NOT NULL
 );
 
+CREATE INDEX products_index ON product_list(id);
+
 CREATE TABLE features (
   id SERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
