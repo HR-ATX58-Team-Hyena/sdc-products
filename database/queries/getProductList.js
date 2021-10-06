@@ -1,7 +1,7 @@
 const { pool } = require('../index');
 
 const getProductList = (callback) => {
-  const queryString = 'SELECT * FROM product_list ORDER BY id ASC LIMIT 20;';
+  const queryString = 'SELECT * FROM product_list ORDER BY id ASC LIMIT 5;';
 
   pool.query(queryString, (err, results) => {
     if (err) {
