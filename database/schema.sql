@@ -10,7 +10,9 @@ CREATE TABLE product_list (
   slogan TEXT NOT NULL,
   description TEXT NOT NULL,
   category TEXT NOT NULL,
-  default_price TEXT NOT NULL
+  default_price TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE INDEX products_index ON product_list(id);
