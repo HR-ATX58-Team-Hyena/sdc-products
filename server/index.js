@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.send('Connected to the Database');
 });
 
-app.get('/products', (req, res) => {
+app.get('/products/list', (req, res) => {
   getProductList((err, allProducts) => {
     if (err) {
       console.log('Error to retrieve all products');
@@ -42,13 +42,12 @@ app.get('/products/:product_id', (req, res) => {
 
 app.get('/products/:product_id/styles', (req, res) => {
   const productId = req.params.product_id;
-
   getProductStyles(productId, (err, stylesData) => {
     if (err) {
       console.log('Error retrieving styles data');
       res.status(404).send();
     } else {
-      res.send(stylesData);
+      res.send(stylesData.rows);
     }
   });
 });
