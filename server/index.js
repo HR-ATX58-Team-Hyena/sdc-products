@@ -21,7 +21,7 @@ app.get('/products/list', (req, res) => {
   getProductList((err, allProducts) => {
     if (err) {
       console.log('Error to retrieve all products');
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.send(allProducts);
     }
@@ -33,7 +33,7 @@ app.get('/products/:product_id', (req, res) => {
   getProductInfo(productId, (err, productInfo) => {
     if (err) {
       console.log('Error retrieving individual product info');
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.send(productInfo);
     }
@@ -45,7 +45,7 @@ app.get('/products/:product_id/styles', (req, res) => {
   getProductStyles(productId, (err, stylesData) => {
     if (err) {
       console.log('Error retrieving styles data');
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.send(stylesData.rows);
     }
@@ -57,9 +57,37 @@ app.get('/products/:product_id/related', (req, res) => {
   getRelatedProducts(productId, (err, relatedInfo) => {
     if (err) {
       console.log('Error retrieving related info');
-      res.status(404).send();
+      res.status(404).send(err);
     } else {
       res.send(relatedInfo);
+    }
+  });
+});
+
+app.get('/cart', (req, res) => {
+  const { userToken } = req.query;
+  getCart(userToken, (err, response) => {
+    if (err) {
+      console.log('Error retrieving cart', userToken);
+      res.status(404).send(err);
+    } else {
+      res.send(response);
+    }
+  });
+});
+
+app.post('/cart', (req, res) => {
+  const params = {
+    usertoken: req.query.userToken,
+    sku_id: req.query.sku_id,
+    active: true,
+  };
+  addToCart(params, (err, response) => {
+    if (err) {
+      console.log('Error adding to cart');
+      res.status(404).send(err);
+    } else {
+      res.send(req.query.sku_id, 'added to cart');
     }
   });
 });
