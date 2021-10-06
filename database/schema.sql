@@ -55,6 +55,13 @@ CREATE TABLE skus (
   quantity INT NOT NULL
 );
 
+CREATE TABLE cart (
+  id SERIAL PRIMARY KEY,
+  user_session INT NOT NULL,
+  product_id INT NOT NULL,
+  active BOOLEAN NOT NULL
+)
+
 ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product_list(id) ON DELETE CASCADE;
 ALTER TABLE styles ADD FOREIGN KEY (product_id) REFERENCES product_list(id) ON DELETE CASCADE;
 ALTER TABLE photos ADD FOREIGN KEY (styleId) REFERENCES styles(id) ON DELETE CASCADE;
