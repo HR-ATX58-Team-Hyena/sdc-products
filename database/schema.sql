@@ -24,11 +24,15 @@ CREATE TABLE features (
   value TEXT NOT NULL
 );
 
+CREATE INDEX features_index ON features(product_id);
+
 CREATE TABLE related (
   id SERIAL NOT NULL PRIMARY KEY,
   current_product_id INT NOT NULL,
   related_product_id INT NOT NULL
 );
+
+CREATE INDEX related_index ON related(current_product_id);
 
 CREATE TABLE styles (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -48,12 +52,16 @@ CREATE TABLE photos (
   thumbnail_url TEXT NOT NULL
 );
 
+CREATE INDEX product_photo_index ON photos(styleId);
+
 CREATE TABLE skus (
   id SERIAL NOT NULL PRIMARY KEY,
   styleId INT NOT NULL,
   size TEXT NOT NULL,
   quantity INT NOT NULL
 );
+
+CREATE INDEX sku_index ON skus(styleId);
 
 CREATE TABLE cart (
   id SERIAL PRIMARY KEY,

@@ -1,10 +1,9 @@
 const { pool } = require('../index');
 
 const addToCart = (params, callback) => {
-  const { userToken, sku_id, active } = params;
-  const queryString = `INSERT INTO cart (user_session, product_id, active) VALUES (${userToken}, ${sku_id}, ${active})`;
+  const queryString = `INSERT INTO cart (user_session, product_id, active) VALUES ($1, $2, $3)`;
 
-  pool.query(queryString, (err, cart) => {
+  pool.query(queryString, params, (err, cart) => {
     if (err) {
       callback(err, null);
     } else {

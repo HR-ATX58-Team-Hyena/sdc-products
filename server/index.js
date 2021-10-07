@@ -5,6 +5,8 @@ const {
   getProductInfo,
   getProductStyles,
   getRelatedProducts,
+  getCart,
+  addToCart,
 } = require('../database/queries/index');
 
 const app = express();
@@ -35,7 +37,7 @@ app.get('/products/:product_id', (req, res) => {
       console.log('Error retrieving individual product info');
       res.status(404).send(err);
     } else {
-      res.send(productInfo);
+      res.send(productInfo.rows);
     }
   });
 });
@@ -59,7 +61,7 @@ app.get('/products/:product_id/related', (req, res) => {
       console.log('Error retrieving related info');
       res.status(404).send(err);
     } else {
-      res.send(relatedInfo);
+      res.send(relatedInfo.rows);
     }
   });
 });
@@ -87,7 +89,7 @@ app.post('/cart', (req, res) => {
       console.log('Error adding to cart');
       res.status(404).send(err);
     } else {
-      res.send(req.query.sku_id, 'added to cart');
+      res.status(201).send(req.query.sku_id, 'added to cart');
     }
   });
 });
