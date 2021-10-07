@@ -10,7 +10,9 @@ CREATE TABLE product_list (
   slogan TEXT NOT NULL,
   description TEXT NOT NULL,
   category TEXT NOT NULL,
-  default_price TEXT NOT NULL
+  default_price TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE INDEX products_index ON product_list(id);
@@ -22,11 +24,15 @@ CREATE TABLE features (
   value TEXT NOT NULL
 );
 
+CREATE INDEX features_index ON features(product_id);
+
 CREATE TABLE related (
   id SERIAL NOT NULL PRIMARY KEY,
   current_product_id INT NOT NULL,
   related_product_id INT NOT NULL
 );
+
+CREATE INDEX related_index ON related(current_product_id);
 
 CREATE TABLE styles (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -46,12 +52,23 @@ CREATE TABLE photos (
   thumbnail_url TEXT NOT NULL
 );
 
+CREATE INDEX product_photo_index ON photos(styleId);
+
 CREATE TABLE skus (
   id SERIAL NOT NULL PRIMARY KEY,
   styleId INT NOT NULL,
   size TEXT NOT NULL,
   quantity INT NOT NULL
 );
+
+CREATE INDEX sku_index ON skus(styleId);
+
+CREATE TABLE cart (
+  id SERIAL PRIMARY KEY,
+  user_session INT NOT NULL,
+  product_id INT NOT NULL,
+  active BOOLEAN NOT NULL
+)
 
 ALTER TABLE features ADD FOREIGN KEY (product_id) REFERENCES product_list(id) ON DELETE CASCADE;
 ALTER TABLE styles ADD FOREIGN KEY (product_id) REFERENCES product_list(id) ON DELETE CASCADE;
