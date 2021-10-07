@@ -37,7 +37,7 @@ app.get('/products/:product_id', (req, res) => {
       console.log('Error retrieving individual product info');
       res.status(404).send(err);
     } else {
-      res.send(productInfo.rows);
+      res.send(productInfo.rows[0].json_agg[0]);
     }
   });
 });
